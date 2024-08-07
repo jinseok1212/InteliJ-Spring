@@ -32,8 +32,8 @@ public class WebConfig implements WebMvcConfigurer {
 //        return new TestVO(); //bean으로 등록
 //    }
 //
-    @Bean //스프링이 이 코드를 실행시켜서 리턴에 담기는 값을 bean으로 등록
-    public void test() {
+//    @Bean //스프링이 이 코드를 실행시켜서 리턴에 담기는 값을 bean으로 등록
+//    public void test() {
 //        System.out.println("스프링 설정파일 실행됨");
 //
 //        int result = applicationContext.getBeanDefinitionCount();
@@ -48,5 +48,5 @@ public class WebConfig implements WebMvcConfigurer {
 //        System.out.println("properties server.port값:"+ port);
 //        System.out.println("properties hello값:" + hello);
 //        System.out.println("properties bye값:" + bye);
-    }
+//    }
 }

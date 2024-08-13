@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @Data
 public class MemoVO {
-    private Long mno;
+    private int sno;
     @Size(min = 5, message = "메모는 최소 5글자 이상이어야 합니다.")
     private String memo;
     @Pattern(regexp = "[0-9]{3}-[0-9]{4}-[0-9]{4}", message = "전화번호 형식이 일치하지 않습니다.")

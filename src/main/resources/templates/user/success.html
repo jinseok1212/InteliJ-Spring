@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> <!--타임리프 선언문(넣어주는 편이 좋음)-->
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>로그인에 성공한 사람이 접근할 수 있는 페이지</h3>
+    <!--타임리프에서 세션 접근할 땐 session. 사용함-->
+    [[${session.userVO.id}]]<br>
+    [[${session.userVO.pw}]]
+
+    <a href="/user/logout">로그아웃</a>
+</body>
+</html>

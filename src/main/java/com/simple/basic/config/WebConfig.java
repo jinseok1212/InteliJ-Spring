@@ -2,17 +2,43 @@ package com.simple.basic.config;
 
 import com.simple.basic.command.TestVO;
 import com.simple.basic.controller.HomeController;
+import com.simple.basic.interceptor.UserAuthHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.Arrays;
+
 @Configuration //스프링 설정 파일이라는 어노테이션
-@PropertySource("classpath:/hello.properties") //classpath -> resources 아래, 특정 properties파일을 참조 받고 싶으면 PropertySource
+//@PropertySource("classpath:/hello.properties") //classpath -> resources 아래, 특정 properties파일을 참조 받고 싶으면 PropertySource
 public class WebConfig implements WebMvcConfigurer {
+
+    //userAuhHandler를 자바 빈으로 등록
+    @Bean
+    public UserAuthHandler userAuthHandler() {
+        return new UserAuthHandler();
+    }
+
+    //인터셉터로 userAuthHandler를 등록
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(userAuthHandler()) //어떤 인터셉터를 등록할 것인지
+//                .addPathPatterns("/user/mypage") //어떤 경로에 인터셉터를 등록할 것인지
+//                .addPathPatterns("/user/success")
+                .addPathPatterns("/user/*") //유저로 시작하는 모든 경로에
+                .excludePathPatterns(Arrays.asList("/user/login", "/user/loginForm", "/user/logout")); //제외할 경로
+
+        //만약 종류별로 다양한 인터셉트를 추가할 거라면, 추가하면 됩니다.
+//        registry.addInterceptor(~~~)
+    }
+
+
 //
 //    @Value("${server.port}") //application.properties파일의 키값을 읽어서 받아옴
 //    String port;
